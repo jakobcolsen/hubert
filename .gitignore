@@ -1,9 +1,0 @@
-#Configuration
-config.json
-
-#Images
-*.png
-*.jpg
-
-#Planning/To-Do
-*.txt
