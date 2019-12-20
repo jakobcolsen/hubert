@@ -5,32 +5,16 @@ module.exports.run = async (bot, message, args) => {
     let userInfo;
     let switchStatus;
     let switchType;
+    let isBot = userInfo.user.bot ? 'Yes' : 'No'
+    let userGame = userInfo.user.presence.game || 'Nothing' 
+    let userStatus = userInfo.user.presence.status
 
     if (message.mentions.members.first()) { 
         userInfo = message.mentions.members.first()
     } else {
         userInfo = message.member
     }
-    if (!userInfo.user.presence.game) {
-        switchType = '¯\\_(ツ)\_/¯'
-    } else {
-        switch(userInfo.user.presence.game.type) {
-            case 0 :
-                switchType = 'Playing'
-            break;
-            case 1 : 
-                switchType = 'Watching'
-            break;
-            case 2 : 
-                switchType = 'Listening to'
-            break;
-        }
-    }
 
-    let isBot = userInfo.user.bot ? 'Yes' : 'No'
-    let userGame = userInfo.user.presence.game || 'Nothing' 
-    let userStatus = userInfo.user.presence.status
-    
     switch(userStatus) {
         case 'online' :
             switchStatus = 'Online'
@@ -46,7 +30,7 @@ module.exports.run = async (bot, message, args) => {
         break;
     }
 
-    const memberembed = new Discord.RichEmbed()
+    const memberembed = new Discord.RichEmbesd()
         .setColor('#00ff83')
         .setThumbnail(userInfo.user.avatarURL)
         .setFooter(`User Information | Hubert ${botconfig.version}`)
@@ -54,8 +38,7 @@ module.exports.run = async (bot, message, args) => {
         .addField('User Tag', userInfo.user.tag, true)
         .addField('User ID', userInfo.id, true)
         .addField('Avatar URL', userInfo.user.avatarURL)
-        .addField('Game Type', switchType, true)
-        .addField('Game', userGame, true)
+        .addField('Presence', userGame, true)
         .addField('Status', switchStatus)
         .addField('Bot?', isBot)
         .addField('Registered On', userInfo.user.createdAt.toDateString(), true)

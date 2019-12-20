@@ -43,11 +43,11 @@ module.exports.run = async (bot, message, args) => {
         errors.cannotSend(message, userMuted)
         console.log(err)
     })
-        userChannels.overwritePermissions(userMuted.user.id, {
-            SEND_MESSAGES: false,
-            ADD_REACTIONS: false
-        })
-        replies.modSuccess(message, 'muted', userMuted, reason)
+    userChannels.overwritePermissions(userMuted.user.id, {
+        SEND_MESSAGES: false,
+        ADD_REACTIONS: false
+    })
+    replies.modSuccess(message, 'muted', userMuted, reason)
 }
 
 module.exports.help = {
